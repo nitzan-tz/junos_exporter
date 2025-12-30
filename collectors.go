@@ -12,6 +12,7 @@ import (
 	"github.com/czerwonk/junos_exporter/pkg/collector"
 	"github.com/czerwonk/junos_exporter/pkg/connector"
 	"github.com/czerwonk/junos_exporter/pkg/features/accounting"
+	"github.com/czerwonk/junos_exporter/pkg/features/aaa"
 	"github.com/czerwonk/junos_exporter/pkg/features/alarm"
 	"github.com/czerwonk/junos_exporter/pkg/features/arp"
 	"github.com/czerwonk/junos_exporter/pkg/features/bfd"
@@ -84,6 +85,7 @@ func (c *collectors) initCollectorsForDevices(device *connector.Device, descRe *
 
 	c.addCollectorIfEnabledForDevice(device, "routingengine", f.RoutingEngine, routingengine.NewCollector)
 	c.addCollectorIfEnabledForDevice(device, "accounting", f.Accounting, accounting.NewCollector)
+	c.addCollectorIfEnabledForDevice(device, "aaa", f.AAA, aaa.NewCollector)
 	c.addCollectorIfEnabledForDevice(device, "alarm", f.Alarm, func() collector.RPCCollector {
 		return alarm.NewCollector(*alarmFilter)
 	})
